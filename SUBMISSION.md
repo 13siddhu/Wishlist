@@ -40,8 +40,13 @@ A high-conversion feature that allows users to move items from their wishlist di
 ![Added to Cart](./screenshots/added-to-cart.png)
 
 ### 4. Social Sharing & Gift Registry
+A unique "Collaborative" model that allows users to share their desired products as a read-only registry.
+*   **Unique Shareable Links:** Generates a robust URL containing the user's secure wishlist ID.
+*   **Read-Only "Registry" View:** Anyone with the link can view the wishlist items but cannot modify them, making it perfect for gift lists.
+*   **One-Click Copying:** A polished modal interface with an auto-select URL and manual copy fallback for older mobile browsers.
+![Share Modal](./screenshots/share-modal.png)
 
-### 4. Merchant Analytics Dashboard
+### 5. Merchant Analytics Dashboard
 A professional Admin UI built within the Shopify Admin for business insights.
 *   **Top 10 Rankings:** Visual bar charts showing trending products.
 *   **Engagement Badges:** Gold, Silver, and Bronze badges for the most-saved items.
