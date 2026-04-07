@@ -21,6 +21,26 @@ Under the hood, I used a **Service-Oriented Architecture (SOA)**. I decoupled th
 
 ---
 
+### 📁 Project Structure
+
+```text
+.
+├── app/
+│   ├── routes/              # Core Shopify App Routes
+│   │   ├── app._index.jsx   # Merchant Dashboard
+│   │   └── api.wishlist.jsx # Storefront API Controller
+│   ├── services/            # Service Layer (Business Logic)
+│   │   ├── wishlist.server.js
+│   │   └── product.server.js
+│   └── db.server.js         # Prisma Database Connection
+├── extensions/              # Shopify App Extensions
+│   └── wishlist-button/     # Storefront Liquid Block
+├── prisma/                  # Database Schema & Migrations
+└── screenshots/             # Visual Assets for Documentation
+```
+
+---
+
 ### 📖 For Evaluators
 I have prepared a detailed **[SUBMISSION.md](./SUBMISSION.md)** file which contains:
 1.  **A Full Feature Breakdown** (with screenshots).
