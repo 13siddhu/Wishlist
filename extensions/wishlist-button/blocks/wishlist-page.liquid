@@ -617,6 +617,13 @@
     const loading = document.getElementById('wp-loading');
     const emptyState = document.getElementById('wp-empty');
 
+    function showToast(message) {
+      const toast = document.getElementById('wp-toast');
+      toast.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>${message}`;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
     async function fetchWishlist() {
       try {
         const response = await fetch(`/apps/wishlist?userId=${userId}`);
@@ -790,27 +797,32 @@
             addBtn.disabled = true;
 
             try {
-              const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
+              const root = window.Shopify?.routes?.root || '/';
+              const response = await fetch(root + 'cart/add.js', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ items: [{ id: variantId, quantity: 1 }] })
+                body: JSON.stringify({ items: [{ id: parseInt(variantId), quantity: 1 }] })
               });
+
+              const responseJson = await response.json();
 
               if (response.ok) {
                 addBtn.innerHTML = '✓ Added!';
                 addBtn.style.background = '#22c55e';
                 showToast("Product added to cart!");
-                // Trigger cart drawer if the theme supports it
-                if (window.Shopify && window.Shopify.PaymentButton) {
-                   // Refresh page or trigger custom event if needed
-                }
+                // Let the button reset after 2 seconds
+                setTimeout(() => {
+                  addBtn.innerHTML = originalHtml;
+                  addBtn.style.background = '';
+                  addBtn.disabled = false;
+                }, 2000);
               } else {
-                throw new Error("Failed to add to cart");
+                throw new Error(responseJson.description || "Failed to add to cart");
               }
             } catch (err) {
               addBtn.innerHTML = 'Error';
               console.error(err);
-              alert("Couldn't add to cart. Product might be out of stock.");
+              alert(err.message || "Couldn't add to cart. Product might be out of stock.");
               setTimeout(() => { addBtn.innerHTML = originalHtml; addBtn.disabled = false; }, 2000);
             }
           };
