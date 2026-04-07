@@ -1,0 +1,272 @@
+<div class="wl-btn-wrapper" id="wl-wrapper-{{ block.id }}">
+  <button id="wishlist-btn-{{ block.id }}" class="wishlist-btn" aria-label="Add to Wishlist" data-state="inactive">
+    <span class="wl-btn-inner">
+      <svg class="heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+      <span id="wishlist-btn-text-{{ block.id }}">Save to Wishlist</span>
+    </span>
+    <span class="wl-ripple"></span>
+  </button>
+
+  <!-- Floating particles that appear on add -->
+  <div class="wl-particles" id="wl-particles-{{ block.id }}" aria-hidden="true">
+    <span class="particle">♥</span>
+    <span class="particle">♥</span>
+    <span class="particle">♥</span>
+    <span class="particle">♥</span>
+    <span class="particle">♥</span>
+  </div>
+</div>
+
+<style>
+  .wl-btn-wrapper {
+    position: relative;
+    margin-top: 16px;
+    width: 100%;
+  }
+
+  .wishlist-btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px 28px;
+    background: #fff;
+    color: #111;
+    border: 1.5px solid #e2e2e2;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .wl-btn-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+  }
+
+  .wishlist-btn:hover {
+    border-color: #c8c8c8;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.09), inset 0 1px 0 rgba(255,255,255,0.8);
+    transform: translateY(-2px);
+  }
+
+  .wishlist-btn:active {
+    transform: scale(0.97) translateY(0);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  /* Active / In-wishlist state */
+  .wishlist-btn.w-active {
+    background: linear-gradient(135deg, #ff4757, #ff6b81);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 8px 24px rgba(255, 71, 87, 0.35), 0 2px 6px rgba(255, 71, 87, 0.2);
+  }
+
+  .wishlist-btn.w-active:hover {
+    background: linear-gradient(135deg, #e8394a, #ff5c74);
+    box-shadow: 0 12px 32px rgba(255, 71, 87, 0.45), 0 4px 12px rgba(255, 71, 87, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .wishlist-btn.w-loading {
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  /* Heart Icon */
+  .heart-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.3s ease, stroke 0.3s ease;
+    stroke: currentColor;
+  }
+
+  .wishlist-btn.w-active .heart-icon {
+    fill: white;
+    stroke: white;
+    animation: heartPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes heartPop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.4) rotate(-10deg); }
+    70%  { transform: scale(0.85) rotate(5deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+
+  /* Ripple effect */
+  .wl-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 71, 87, 0.25);
+    transform: scale(0);
+    width: 120%;
+    padding-top: 120%;
+    top: 50%;
+    left: 50%;
+    margin-top: -60%;
+    margin-left: -60%;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .wishlist-btn.ripple-active .wl-ripple {
+    animation: rippleAnim 0.55s ease-out forwards;
+  }
+
+  @keyframes rippleAnim {
+    0%   { transform: scale(0); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 0; }
+  }
+
+  /* Floating particles */
+  .wl-particles {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    width: 1px;
+    height: 1px;
+  }
+
+  .particle {
+    position: absolute;
+    font-size: 14px;
+    opacity: 0;
+    color: #ff4757;
+    pointer-events: none;
+  }
+
+  .particle.fly {
+    animation: particleFly 0.9s ease-out forwards;
+  }
+
+  .particle:nth-child(1).fly { animation-delay: 0s;    --tx: -40px; }
+  .particle:nth-child(2).fly { animation-delay: 0.06s; --tx: -15px; }
+  .particle:nth-child(3).fly { animation-delay: 0.1s;  --tx: 5px;  }
+  .particle:nth-child(4).fly { animation-delay: 0.05s; --tx: 25px; }
+  .particle:nth-child(5).fly { animation-delay: 0.08s; --tx: 45px; }
+
+  @keyframes particleFly {
+    0%   { opacity: 1; transform: translate(var(--tx, 0), 0) scale(0.7); }
+    60%  { opacity: 0.8; }
+    100% { opacity: 0; transform: translate(var(--tx, 0), -55px) scale(1.2); }
+  }
+</style>
+
+<script>
+  (async function() {
+    const btn = document.getElementById("wishlist-btn-{{ block.id }}");
+    const label = document.getElementById("wishlist-btn-text-{{ block.id }}");
+    const particles = document.getElementById("wl-particles-{{ block.id }}");
+    const productId = "{{ product.id }}";
+
+    function getUUID() {
+      if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+
+    let userId = localStorage.getItem("wishlist_user");
+    if (!userId) {
+      userId = getUUID();
+      localStorage.setItem("wishlist_user", userId);
+    }
+
+    try {
+      const response = await fetch(`/apps/wishlist?userId=${userId}&checkProductId=${productId}`);
+      const data = await response.json();
+      if (data.inWishlist) toggleButtonState(true);
+    } catch (e) {
+      console.warn("Failed to check wishlist state", e);
+    }
+
+    function toggleButtonState(isInWishlist) {
+      if (isInWishlist) {
+        btn.classList.add("w-active");
+        label.textContent = "Saved to Wishlist ✓";
+        btn.setAttribute("data-state", "active");
+        btn.setAttribute("aria-label", "Remove from Wishlist");
+      } else {
+        btn.classList.remove("w-active");
+        label.textContent = "Save to Wishlist";
+        btn.setAttribute("data-state", "inactive");
+        btn.setAttribute("aria-label", "Add to Wishlist");
+      }
+    }
+
+    function fireParticles() {
+      const particleEls = particles.querySelectorAll('.particle');
+      particleEls.forEach(p => p.classList.remove('fly'));
+      void particles.offsetWidth; // Reflow
+      particleEls.forEach(p => p.classList.add('fly'));
+    }
+
+    function triggerRipple() {
+      btn.classList.remove('ripple-active');
+      void btn.offsetWidth;
+      btn.classList.add('ripple-active');
+      setTimeout(() => btn.classList.remove('ripple-active'), 600);
+    }
+
+    btn.onclick = async () => {
+      const isCurrentlyActive = btn.getAttribute("data-state") === "active";
+      const userAction = isCurrentlyActive ? "REMOVE" : "ADD";
+      console.log("[Wishlist] Click - state:", isCurrentlyActive, "action:", userAction, "productId:", productId, "userId:", userId);
+
+      triggerRipple();
+      toggleButtonState(!isCurrentlyActive);
+      if (!isCurrentlyActive) fireParticles();
+
+      btn.classList.add("w-loading");
+      try {
+        const response = await fetch("/apps/wishlist", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ productId, userId, action: userAction })
+        });
+        const result = await response.json().catch(() => ({}));
+        console.log("[Wishlist] API response:", response.status, result);
+        if (!response.ok) throw new Error(result.msg || result.error || "Request failed");
+      } catch (e) {
+        console.error("[Wishlist] Error:", e.message);
+        toggleButtonState(isCurrentlyActive);
+        alert("Wishlist action failed: " + e.message);
+      } finally {
+        btn.classList.remove("w-loading");
+      }
+    };
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Wishlist Button",
+  "target": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Button Active Color",
+      "default": "#ff4757"
+    }
+  ]
+}
+{% endschema %}
