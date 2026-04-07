@@ -23,6 +23,12 @@ This project is a high-performance, feature-rich Wishlist app built for the Shop
 ![Wishlist Grid](./screenshots/wishlist-page-grid.png)
 > **In this view:** The main dashboard where users manage their saved items and added personal notes.
 
+### 📝 Personal Shopping Notes
+Users can add "Notes" to their items (e.g., "Buy for anniversary"). This adds a personal touch found only in premium apps.
+
+![Note-Taking UI](./screenshots/note-ui.png)
+> **In this view:** The elegant "Add Note" sliding drawer that appears when users want to save context for their items.
+
 ---
 
 ### 3. One-Click "Add to Cart"
