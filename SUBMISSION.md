@@ -22,22 +22,22 @@ This application provides a seamless, "app-like" experience for customers to sav
 A high-engagement add-to-wishlist button placed directly on the Product Detail Page.
 *   **Heart Particles:** Exploding particle effect on "Add" to provide positive micro-feedback.
 *   **Persistence:** State is fetched asynchronously and cached for near-instant loading.
-*   **Status Toggle:** Clear visual transition between "Add" and "Saved" states.
-*   *Screenshot Placeholder: `./screenshots/pdp-wishlist-button.png`*
+*   **Admin Toggle:** Easy "Add to Wishlist" button on every product page.
+![PDP Wishlist Button](./screenshots/pdp-wishlist-button.png)
 
-### 2. The Wishlist Command Center
+### 2. Modern Grid Layout Command Center
 A dedicated storefront page located at `/pages/my-wishlist` where users manage their favorites.
 *   **Note-Taking UI:** A collapsible, elegant text area where users can add personal context (e.g., "Size M for Gifting").
 *   **Adaptive Grid:** Responsive layout that looks stunning on mobile and desktop.
 *   **Remove with Style:** Slide-out animations for a smooth item deletion experience.
-*   *Screenshot Placeholder: `./screenshots/wishlist-page-grid.png`*
+![Wishlist Grid](./screenshots/wishlist-page-grid.png)
 
 ### 3. One-Click "Add to Cart"
 A high-conversion feature that allows users to move items from their wishlist directly into their shopping cart.
 *   **Seamless AJAX Integration:** Uses the Shopify Cart API to add items without a page reload.
 *   **Visual Confirmation:** The button transforms into a "Added!" state with a green success indicator.
 *   **Automatic Variant Selection:** Intelligently selects the default product variant for immediate purchase.
-*   *Screenshot Placeholder: `./screenshots/added-to-cart.png`*
+![Added to Cart](./screenshots/added-to-cart.png)
 
 ### 4. Social Sharing & Gift Registry
 
@@ -45,9 +45,9 @@ A high-conversion feature that allows users to move items from their wishlist di
 A professional Admin UI built within the Shopify Admin for business insights.
 *   **Top 10 Rankings:** Visual bar charts showing trending products.
 *   **Engagement Badges:** Gold, Silver, and Bronze badges for the most-saved items.
-*   **Live Activity Feed:** A real-time view of recent customer wishlist events.
-*   **Conversion Tips:** Actionable merchant strategies based on wishlist data.
-*   *Screenshot Placeholder: `./screenshots/admin-dashboard.png`*
+*   **Recent Activity:** Real-time feed of the latest items added by customers.
+*   **Top Products:** Visual chart showing which products are most desired.
+![Admin Dashboard](./screenshots/admin-dashboard.png)
 
 ---
 
