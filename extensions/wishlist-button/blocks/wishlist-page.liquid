@@ -797,8 +797,11 @@
             addBtn.disabled = true;
 
             try {
+              console.log("[Wishlist] Adding to cart, variantId:", variantId);
               const root = window.Shopify?.routes?.root || '/';
-              const response = await fetch(root + 'cart/add.js', {
+              const cartUrl = (root.endsWith('/') ? root : root + '/') + 'cart/add.js';
+              
+              const res = await fetch(cartUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ items: [{ id: parseInt(variantId), quantity: 1 }] })

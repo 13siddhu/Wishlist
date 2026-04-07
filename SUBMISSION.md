@@ -93,8 +93,9 @@ We decoupled the standard "Monolithic Route" Shopify structure into clean servic
 ## 📸 Screenshots Guide
 *Note for Evaluator: Please refer to the `/screenshots` directory in this repository for full-resolution captures of the app in action.*
 
-1.  **./screenshots/pdp-active.png**: The heart button in its "Saved" state.
-2.  **./screenshots/wishlist-grid.png**: The main wishlist page showing 3+ items.
-3.  **./screenshots/note-ui.png**: The expanded "Add Note" textarea with premium styling.
-4.  **./screenshots/share-flow.png**: The "Share Wishlist" modal open.
-5.  **./screenshots/admin-main.png**: The full Merchant Dashboard view.
+1.  **./screenshots/pdp-wishlist-button.png**: The heart button on the product page.
+2.  **./screenshots/wishlist-page-grid.png**: The main wishlist page showing saved items.
+3.  **./screenshots/note-ui.png**: The expanded "Add Note" UI in action.
+4.  **./screenshots/share-modal.png**: The "Share Wishlist" modal with the copyable link.
+5.  **./screenshots/admin-dashboard.png**: The merchant analytical dashboard.
+6.  **./screenshots/added-to-cart.png**: (Action Needed) Screenshot showing the conversion from wishlist to cart.
