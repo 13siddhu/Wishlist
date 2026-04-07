@@ -17,6 +17,11 @@ export async function hydrateProducts(admin, productIds) {
               url
               altText
             }
+            variants(first: 1) {
+              nodes {
+                id
+              }
+            }
             priceRangeV2 {
               minVariantPrice {
                 amount

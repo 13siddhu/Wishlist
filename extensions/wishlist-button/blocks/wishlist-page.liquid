@@ -381,6 +381,18 @@
     background: #111; color: #fff; font-size: 1rem; font-weight: 600;
     transition: all 0.25s ease; border: none; cursor: pointer;
   }
+  .wp-add-to-cart-btn {
+    flex: 1.2; text-align: center; text-decoration: none;
+    padding: 0.9rem 1rem; border-radius: 12px;
+    background: linear-gradient(135deg, #111, #333);
+    color: #fff; font-size: 1rem; font-weight: 600;
+    transition: all 0.25s ease; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .wp-add-to-cart-btn:hover {
+    background: #000; box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    transform: translateY(-1px);
+  }
   .wp-shop-btn:hover {
     background: #000; box-shadow: 0 6px 18px rgba(0,0,0,0.2);
     transform: translateY(-1px);
@@ -669,7 +681,10 @@
             ${noteHtml}
             ${!isSharedView ? `
             <div class="wp-card-actions">
-              <a href="${productUrl}" class="wp-shop-btn">View Product</a>
+              <button class="wp-add-to-cart-btn btn-add-cart" data-variant-id="${item.product.variants?.nodes[0]?.id?.split('/').pop() || ''}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                Add to Cart
+              </button>
               <button class="wp-remove-btn btn-remove" aria-label="Remove from wishlist">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
@@ -759,6 +774,44 @@
               rmBtn.style.opacity = '1';
               rmBtn.disabled = false;
               alert("Failed to remove item");
+            }
+          };
+
+          card.querySelector('.btn-add-cart').onclick = async () => {
+            const addBtn = card.querySelector('.btn-add-cart');
+            const variantId = addBtn.getAttribute('data-variant-id');
+            if (!variantId) {
+              alert("Sorry, this product doesn't have an available variant.");
+              return;
+            }
+
+            const originalHtml = addBtn.innerHTML;
+            addBtn.innerHTML = 'Adding...';
+            addBtn.disabled = true;
+
+            try {
+              const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ items: [{ id: variantId, quantity: 1 }] })
+              });
+
+              if (response.ok) {
+                addBtn.innerHTML = '✓ Added!';
+                addBtn.style.background = '#22c55e';
+                showToast("Product added to cart!");
+                // Trigger cart drawer if the theme supports it
+                if (window.Shopify && window.Shopify.PaymentButton) {
+                   // Refresh page or trigger custom event if needed
+                }
+              } else {
+                throw new Error("Failed to add to cart");
+              }
+            } catch (err) {
+              addBtn.innerHTML = 'Error';
+              console.error(err);
+              alert("Couldn't add to cart. Product might be out of stock.");
+              setTimeout(() => { addBtn.innerHTML = originalHtml; addBtn.disabled = false; }, 2000);
             }
           };
         }

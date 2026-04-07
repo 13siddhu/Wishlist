@@ -32,12 +32,14 @@ A dedicated storefront page located at `/pages/my-wishlist` where users manage t
 *   **Remove with Style:** Slide-out animations for a smooth item deletion experience.
 *   *Screenshot Placeholder: `./screenshots/wishlist-page-grid.png`*
 
-### 3. Social Sharing & Gift Registry
-A unique "Collaborative" sharing model that generates beautiful, readable links.
-*   **Automated URL Generation:** One-click link generation for sharing.
-*   **Read-Only Mode:** Shared links can be viewed by anyone without an account.
-*   **Clipboard Fallback:** Robust copy-to-clipboard logic for all mobile browsers.
-*   *Screenshot Placeholder: `./screenshots/share-modal.png`*
+### 3. One-Click "Add to Cart"
+A high-conversion feature that allows users to move items from their wishlist directly into their shopping cart.
+*   **Seamless AJAX Integration:** Uses the Shopify Cart API to add items without a page reload.
+*   **Visual Confirmation:** The button transforms into a "Added!" state with a green success indicator.
+*   **Automatic Variant Selection:** Intelligently selects the default product variant for immediate purchase.
+*   *Screenshot Placeholder: `./screenshots/added-to-cart.png`*
+
+### 4. Social Sharing & Gift Registry
 
 ### 4. Merchant Analytics Dashboard
 A professional Admin UI built within the Shopify Admin for business insights.
